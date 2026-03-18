@@ -45,11 +45,9 @@ public class EmailServiceImpl implements EmailService {
                     new String(resource.getInputStream().readAllBytes(),
                     StandardCharsets.UTF_8);
 
-            htmlContent = htmlContent.replace("{{customerName}}",
-                    request.getCustomerName());
-
-            htmlContent = htmlContent.replace("{{email}}",
-                    request.getEmail());
+            // replace name and email placeholders in birthday template
+            htmlContent = htmlContent.replace("{{customerName}}", request.getCustomerName());
+            htmlContent = htmlContent.replace("{{email}}", request.getEmail());
 
             MimeMessage message = mailSender.createMimeMessage();
 
@@ -62,8 +60,7 @@ public class EmailServiceImpl implements EmailService {
 
             mailSender.send(message);
 
-            logger.info("Birthday email sent successfully to {}",
-                    request.getEmail());
+            logger.info("Birthday email sent successfully to {}", request.getEmail());
 
         } catch (Exception ex) {
 
@@ -77,13 +74,11 @@ public class EmailServiceImpl implements EmailService {
      * Vehicle Not Available Email
      */
     @Override
-    public void sendVehicleNotAvailableEmail(
-            EmailRequestDTO request) {
+    public void sendVehicleNotAvailableEmail(EmailRequestDTO request) {
 
         try {
 
-            logger.info("Preparing VEHICLE_NOT_AVAILABLE email for {}",
-                    request.getEmail());
+            logger.info("Preparing VEHICLE_NOT_AVAILABLE email for {}", request.getEmail());
 
             String subject = "Vehicle Not Available";
 
@@ -94,14 +89,10 @@ public class EmailServiceImpl implements EmailService {
                     new String(resource.getInputStream().readAllBytes(),
                     StandardCharsets.UTF_8);
 
-            htmlContent = htmlContent.replace("{{customerName}}",
-                    request.getCustomerName());
-
-            htmlContent = htmlContent.replace("{{email}}",
-                    request.getEmail());
-
-            htmlContent = htmlContent.replace("{{searchCriteria}}",
-                    request.getSearchCriteria());
+            // replace customer and search info placeholders
+            htmlContent = htmlContent.replace("{{customerName}}", request.getCustomerName());
+            htmlContent = htmlContent.replace("{{email}}", request.getEmail());
+            htmlContent = htmlContent.replace("{{searchCriteria}}", request.getSearchCriteria());
 
             MimeMessage message = mailSender.createMimeMessage();
 
@@ -114,8 +105,7 @@ public class EmailServiceImpl implements EmailService {
 
             mailSender.send(message);
 
-            logger.info("Vehicle not available email sent to {}",
-                    request.getEmail());
+            logger.info("Vehicle not available email sent to {}", request.getEmail());
 
         } catch (Exception ex) {
 
@@ -129,13 +119,11 @@ public class EmailServiceImpl implements EmailService {
      * Vehicle Reservation Confirmation Email
      */
     @Override
-    public void sendVehicleReservationEmail(
-            EmailRequestDTO request) {
+    public void sendVehicleReservationEmail(EmailRequestDTO request) {
 
         try {
 
-            logger.info("Preparing VEHICLE_RESERVATION_EVENT email for {}",
-                    request.getEmail());
+            logger.info("Preparing VEHICLE_RESERVATION_EVENT email for {}", request.getEmail());
 
             String subject = "Vehicle Reservation Confirmation";
 
@@ -146,21 +134,19 @@ public class EmailServiceImpl implements EmailService {
                     new String(resource.getInputStream().readAllBytes(),
                     StandardCharsets.UTF_8);
 
-            htmlContent = htmlContent.replace("{{customerName}}",
-                    request.getCustomerName());
+            // replace customer info placeholders
+            htmlContent = htmlContent.replace("{{customerName}}", request.getCustomerName());
+            htmlContent = htmlContent.replace("{{email}}", request.getEmail());
 
-            htmlContent = htmlContent.replace("{{email}}",
-                    request.getEmail());
-
-            htmlContent = htmlContent.replace("{{vehicleId}}",
-                    request.getVehicleId());
-
-            // added mappings for template
-            htmlContent = htmlContent.replace("{{vehicleName}}",
-                    request.getVehicleName());
-
-            htmlContent = htmlContent.replace("{{vehicleType}}",
-                    request.getVehicleType());
+            // replace all product detail placeholders so nothing shows as raw {{placeholder}}
+            htmlContent = htmlContent.replace("{{vehicleCategory}}", request.getVehicleCategory());
+            htmlContent = htmlContent.replace("{{vehicleRentalType}}", request.getVehicleType());
+            htmlContent = htmlContent.replace("{{vehicleSize}}", request.getVehicleSize());
+            htmlContent = htmlContent.replace("{{vehicleDriveType}}", request.getVehicleDriveType());
+            htmlContent = htmlContent.replace("{{vehicleDurationType}}", request.getVehicleDuration());
+            htmlContent = htmlContent.replace("{{vehiclePrice}}", request.getVehiclePrice());
+            htmlContent = htmlContent.replace("{{availableFrom}}", request.getValidFrom());
+            htmlContent = htmlContent.replace("{{availableTo}}", request.getValidTo());
 
             MimeMessage message = mailSender.createMimeMessage();
 
@@ -173,8 +159,7 @@ public class EmailServiceImpl implements EmailService {
 
             mailSender.send(message);
 
-            logger.info("Vehicle reservation confirmation sent to {}",
-                    request.getEmail());
+            logger.info("Vehicle reservation confirmation sent to {}", request.getEmail());
 
         } catch (Exception ex) {
 

@@ -15,31 +15,28 @@ public class EmailRequestDTO {
     @Email(message = "Invalid email format")
     private String email;
 
-    // vehicle id for reservation email
+    // product id for reservation email
     private String vehicleId;
 
     // search criteria for not available email
     private String searchCriteria;
 
-    // vehicle name for reservation email
-    private String vehicleName;
-
-    // vehicle type for reservation email
+    // all product fields needed to fill the email template placeholders
+    private String vehicleCategory;
+    private String vehicleSize;
     private String vehicleType;
+    private String vehicleDriveType;
+    private String vehicleDuration;
+    private String vehiclePrice;
+    private String validFrom;
+    private String validTo;
 
     public EmailRequestDTO() {}
 
+    // used by birthday email flow — keep this intact
     public EmailRequestDTO(String customerName, String email) {
         this.customerName = customerName;
         this.email = email;
-    }
-
-    public EmailRequestDTO(String customerName, String email,
-                           String vehicleId, String searchCriteria) {
-        this.customerName = customerName;
-        this.email = email;
-        this.vehicleId = vehicleId;
-        this.searchCriteria = searchCriteria;
     }
 
     public String getCustomerName() {
@@ -74,12 +71,20 @@ public class EmailRequestDTO {
         this.searchCriteria = searchCriteria;
     }
 
-    public String getVehicleName() {
-        return vehicleName;
+    public String getVehicleCategory() {
+        return vehicleCategory;
     }
 
-    public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
+    public void setVehicleCategory(String vehicleCategory) {
+        this.vehicleCategory = vehicleCategory;
+    }
+
+    public String getVehicleSize() {
+        return vehicleSize;
+    }
+
+    public void setVehicleSize(String vehicleSize) {
+        this.vehicleSize = vehicleSize;
     }
 
     public String getVehicleType() {
@@ -88,5 +93,45 @@ public class EmailRequestDTO {
 
     public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
+    }
+
+    public String getVehicleDriveType() {
+        return vehicleDriveType;
+    }
+
+    public void setVehicleDriveType(String vehicleDriveType) {
+        this.vehicleDriveType = vehicleDriveType;
+    }
+
+    public String getVehicleDuration() {
+        return vehicleDuration;
+    }
+
+    public void setVehicleDuration(String vehicleDuration) {
+        this.vehicleDuration = vehicleDuration;
+    }
+
+    public String getVehiclePrice() {
+        return vehiclePrice;
+    }
+
+    public void setVehiclePrice(String vehiclePrice) {
+        this.vehiclePrice = vehiclePrice;
+    }
+
+    public String getValidFrom() {
+        return validFrom;
+    }
+
+    public void setValidFrom(String validFrom) {
+        this.validFrom = validFrom;
+    }
+
+    public String getValidTo() {
+        return validTo;
+    }
+
+    public void setValidTo(String validTo) {
+        this.validTo = validTo;
     }
 }
